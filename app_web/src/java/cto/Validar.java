@@ -9,6 +9,7 @@ import dao.Persona_DAO;
 import dto.PersonaDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -67,11 +68,15 @@ public class Validar extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             String action = request.getParameter("accion");            
+            List  <PersonaDTO> listap;
         if (action.equals("ingresar")) {            
             String user = request.getParameter("txtUser");
             String pass=request.getParameter("txtPass");
             persondto=person.validar(user, pass);            
-            if(persondto.getNombre()!=null){                                
+            if(persondto.getNombre()!=null){   
+                listap=person.getPersonas();                
+                request.setAttribute("listap", listap);
+                request.setAttribute("user",persondto);
                 request.getRequestDispatcher("Controlador?accion=Principal").forward(request, response);
             }
             else {

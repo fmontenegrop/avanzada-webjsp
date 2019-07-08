@@ -23,14 +23,14 @@
                 </div>
                 <div class="btn-group pr-5">
                     <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">                    
-                        
+                        ${user.getNombre()}
                     </button>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="#">
-                            <img src="img\user.png" alt="60" width="60">
+                            <img src="img\user.png" alt="60" width="60">                            
                         </a>
-                        <a class="dropdown-item" href="#"></a>
-                        <a class="dropdown-item" href="#"></a>                    
+                        <a class="dropdown-item" href="#">${user.getNombre()} ${user.getApellido()}</a>
+                        <a class="dropdown-item" href="#">${user.getCorreo()}</a>                    
                         <div class="dropdown-divider"></div>
                         <form action="Validar" method="POST">
                             <button name="accion" value="salir" class="dropdown-item">Salir</button>
@@ -45,42 +45,37 @@
         <div class="container pt-5">
             <div class="row">
                 <div class="col-md-2">
-                      <button class="btn btn-outline-success" href="#">Actualizar</button>
+                    <button class="btn btn-outline-success" href="#">Actualizar</button>
                 </div>
                 <div class="col">
-                    <table class="table">
-                        <thead class="thead-dark">
+                    <table class="table table-hover">
+                        <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
+                                <th scope="col">Id</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th>
+                                <th scope="col">Correo</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
+                            
+                         <c:forEach var = "lista" items="${listap}">
+                            <tr>                                
+                                <td>${listap[0].getId()}</td>
+                                <td>${lista.getNombre()}</td>
+                                <td>${lista.getApellido()}</td>
+                                <td>${lista.getCorreo()}</td>
+                            </tr>                            
+                        </c:forEach>
+                            
+                            
                         </tbody>
                     </table>
+                    
                 </div>
             </div>
         </div>
+                                
     </body>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
