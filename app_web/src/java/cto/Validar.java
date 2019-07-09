@@ -22,10 +22,16 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Validar", urlPatterns = {"/Validar"})
 public class Validar extends HttpServlet {
+    List  <PersonaDTO> listap;
+
+    public List<PersonaDTO> getListap() {
+        return listap;
+    }
+    
     Persona_DAO person=new Persona_DAO();
     PersonaDTO persondto=new PersonaDTO();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+        throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -68,14 +74,14 @@ public class Validar extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             String action = request.getParameter("accion");            
-            List  <PersonaDTO> listap;
+            
         if (action.equals("ingresar")) {            
             String user = request.getParameter("txtUser");
             String pass=request.getParameter("txtPass");
             persondto=person.validar(user, pass);            
             if(persondto.getNombre()!=null){   
-                listap=person.getPersonas();                
-                request.setAttribute("listap", listap);
+               this.listap=person.getPersonas();                
+                request.setAttribute("listap", this.listap);
                 request.setAttribute("user",persondto);
                 request.getRequestDispatcher("Controlador?accion=Principal").forward(request, response);
             }

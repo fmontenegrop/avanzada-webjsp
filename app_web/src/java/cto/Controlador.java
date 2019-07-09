@@ -1,7 +1,10 @@
 package cto;
 
+import dao.Persona_DAO;
+import dto.PersonaDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author GAMER
  */
 public class Controlador extends HttpServlet {
-
+    Persona_DAO person=new Persona_DAO();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -27,6 +30,17 @@ public class Controlador extends HttpServlet {
         String accion = request.getParameter("accion");        
         switch (accion) {
             case "Principal":
+                request.getRequestDispatcher("Principal.jsp").forward(request, response);
+                break;
+            case "Agregar":
+                 List  <PersonaDTO> listap;
+                 listap=person.getPersonas();                
+                request.setAttribute("listap",listap);
+                String nombre = request.getParameter("txtNadd");
+                String apellido=request.getParameter("txtAadd");
+                String correo=request.getParameter("txtCadd");
+                this.person.insertP(nombre, apellido, correo);
+                System.out.println("Succesfull");
                 request.getRequestDispatcher("Principal.jsp").forward(request, response);
                 break;
         }

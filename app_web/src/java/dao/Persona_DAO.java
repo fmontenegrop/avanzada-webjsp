@@ -134,19 +134,16 @@ public class Persona_DAO {
         ResultSet rs; 
         String sql="SELECT * FROM `persona` WHERE id=\""+id+"\" and nombre=\""+nombre+"\" ";        
         try{
-            con=cn.obtener();           
-             if(con!=null)  System.out.println(".___.");
+            con=cn.obtener();                        
             ps=con.prepareStatement(sql);           
             rs=ps.executeQuery();                       
             while(rs.next()){                
                 PersonaDTO obj = new PersonaDTO(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("correo"));
                 person=obj;                
-            }
-           
+            }           
         }catch(Exception e){
             
-        }
-         System.out.println(""+person.getNombre());
+        }        
         return person;
     }
 ;
