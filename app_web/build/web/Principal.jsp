@@ -49,10 +49,7 @@
     <body>
         <div class="container pt-5">
             <div class="row">
-                <div class="col-md-2 pt-5">
-                    <div class="row">
-                        <button class="btn btn-outline-success" href="#">Actualizar</button>
-                    </div>
+                <div class="col-md-2 pt-5">                    
                     <div class="row pt-3">
                         <!-- Button trigger modal -->
                         <button type="button" class="btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
@@ -63,7 +60,7 @@
                 <div class="col">
                     <table class="table table-hover">
                         <thead>
-                            <tr>
+                            <tr>                        
                                 <th scope="col">Id</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Apellido</th>
@@ -71,21 +68,26 @@
                                 <th scope="col">Accion</th>
                             </tr>
                         </thead>
-                        <tbody>
-
-                            <c:forEach var="persona" items="${listap}">
-                                <tr>                                
-                                    <td>${persona.getId()}</td>                                
-                                    <td>${persona.getNombre()}</td>
-                                    <td>${persona.getApellido()}</td>
-                                    <td>${persona.getCorreo()}</td>                                
-                                    <td><button type="button" class="btn btn-warning">Editar</button> <button type="button" class="btn btn-danger">Eliminar</button></td>
-                                </tr>     
-                            </c:forEach>
-
-
-
-
+                        <tbody>                      
+                            <c:forEach var="persona" items="${listap}">                                
+                                <tr>                            
+                            
+                                 <td name="id">${persona.getId()}</td>                                
+                                <td name="nombre">${persona.getNombre()}</td>
+                                <td name="apellido">${persona.getApellido()}</td>
+                                <td name="correo">${persona.getCorreo()}</td>                                
+                                <td>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <button type="button" class="btn btn-warning">Editar</button>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <a href="Controlador?accion=Eliminar&id=${persona.getId()}" class="btn btn-danger btn-block">Eliminar</a>
+                                        </div>                                    
+                                    </div>                                    
+                                </td>                                                                                        
+                            </tr>     
+                        </c:forEach>
                         </tbody>
                     </table>                   
                 </div>
@@ -118,14 +120,14 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
-                                          <input type="submit" name="accion" value="Agregar" class="btn btn-primary btn-block">
+                                        <input type="submit" name="accion" value="Agregar" class="btn btn-primary btn-block">
                                     </div>
                                     <div class="offset-md-4 col-md-4">
-                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                     </div>
-                                        
+
                                 </div>
-                                
+
                             </form>
                         </div>
                     </div>                    

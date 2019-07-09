@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class Controlador extends HttpServlet {
     Persona_DAO person=new Persona_DAO();
+    List  <PersonaDTO> listap;
+    PersonaDTO persondto=new PersonaDTO();    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -27,21 +29,32 @@ public class Controlador extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String accion = request.getParameter("accion");        
+        String accion = request.getParameter("accion");                
         switch (accion) {
             case "Principal":
                 request.getRequestDispatcher("Principal.jsp").forward(request, response);
                 break;
-            case "Agregar":
-                 List  <PersonaDTO> listap;
-                 listap=person.getPersonas();                
-                request.setAttribute("listap",listap);
+            case "Agregar": 
+                String user = request.getParameter("txtUser");
+                String pass=request.getParameter("txtPass");
+                persondto=person.validar(user, pass);                  
                 String nombre = request.getParameter("txtNadd");
                 String apellido=request.getParameter("txtAadd");
                 String correo=request.getParameter("txtCadd");
                 this.person.insertP(nombre, apellido, correo);
                 System.out.println("Succesfull");
+                this.listap=person.getPersonas();                
+                request.setAttribute("listap",this.listap);
+                request.setAttribute("user",persondto);
                 request.getRequestDispatcher("Principal.jsp").forward(request, response);
+                break;
+            case "Eliminar":               
+                String id=request.getParameter("id");
+                this.person.deleteP(id);
+                this.listap=person.getPersonas();                
+                request.setAttribute("listap",this.listap);
+                request.getRequestDispatcher("Principal.jsp").forward(request, response);
+                System.out.println("Delete succesfull");
                 break;
         }
         response.setContentType("text/html;charset=UTF-8");
